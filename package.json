@@ -1,0 +1,22 @@
+{
+  "name": "cypress-check-sort",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lasithdilshan20/cypress-check-sort.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lasithdilshan20/cypress-check-sort/issues"
+  },
+  "homepage": "https://github.com/lasithdilshan20/cypress-check-sort#readme",
+  "dependencies": {
+    "cypress": "^13.6.6"
+  }
+}

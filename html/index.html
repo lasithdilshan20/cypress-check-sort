@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px;
+        }
+        .list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .list-item {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+        .sort-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .generic-container span {
+            display: block; /* Makes spans behave like block elements for easy visual sorting */
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Sample Items for Sorting</h2>
+    <button class="sort-button" onclick="sortItems(true)" id="sortAscending">Sort Ascending</button>
+    <button class="sort-button" onclick="sortItems(false)" id="sortDescending">Sort Descending</button>
+    <ul class="list" id="listArea">
+        <li class="list-item"><a href="/item/3" class="item-link">C Item</a></li>
+        <li class="list-item"><a href="/item/1" class="item-link">A Item</a></li>
+        <li class="list-item"><a href="/item/4" class="item-link">D Item</a></li>
+        <li class="list-item"><a href="/item/2" class="item-link">B Item</a></li>
+        <li class="list-item"><a href="/item/5" class="item-link">E Item</a></li>
+    </ul>
+
+
+    <h2>Sample Table for Sorting</h2>
+    <table id="tableArea">
+        <tr>
+            <th>Item</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>C Item</td>
+            <td>Description of C Item</td>
+        </tr>
+        <tr>
+            <td>A Item</td>
+            <td>Description of A Item</td>
+        </tr>
+        <tr>
+            <td>D Item</td>
+            <td>Description of D Item</td>
+        </tr>
+        <tr>
+            <td>B Item</td>
+            <td>Description of B Item</td>
+        </tr>
+        <tr>
+            <td>E Item</td>
+            <td>Description of E Item</td>
+        </tr>
+    </table>
+
+    <h2>Generic Container for Sorting</h2>
+    <div class="generic-container" id="divArea">
+        <span>Text C</span>
+        <span>Text A</span>
+        <span>Text B</span>
+        <span>Text D</span>
+        <span>Text E</span>
+    </div>
+</div>
+
+<script>
+    function sortItems(isAscending) {
+        // Sort UL List
+        const list = document.querySelector('.list');
+        if (list) {
+            sortChildElements(list.querySelectorAll('.list-item'), isAscending);
+        }
+
+        // Sort Table Rows
+        const table = document.querySelector('#tableArea');
+        if (table) {
+            const rows = Array.from(table.querySelectorAll('tr')).slice(1); // Skip header row
+            sortChildElements(rows, isAscending, true);
+        }
+
+        // Sort Generic Container Spans
+        const genericContainer = document.querySelector('.generic-container');
+        if (genericContainer) {
+            const spans = genericContainer.querySelectorAll('span');
+            sortChildElements(spans, isAscending);
+        }
+    }
+
+    function sortChildElements(elements, isAscending, isTableRow = false) {
+        const items = Array.from(elements);
+        items.sort((a, b) => {
+            const textA = isTableRow ? a.cells[0].textContent.trim() : a.textContent.trim();
+            const textB = isTableRow ? b.cells[0].textContent.trim() : b.textContent.trim();
+            return isAscending ? textA.localeCompare(textB) : textB.localeCompare(textA);
+        });
+
+        const parent = items[0] && items[0].parentNode;
+        while (parent && parent.firstChild) parent.removeChild(parent.firstChild);
+        items.forEach(item => parent.appendChild(item));
+    }
+</script>
+</body>
+</html>
