@@ -21,17 +21,14 @@ describe('template spec', () => {
 
   it('DIV', () => {
     cy.get('#sortAscending').click()
-    cy.get('#divArea').verifySort('asc');
-
-    cy.get('#sortDescending').click().wait(1000)
-    cy.get('#divArea').verifySort('desc');
+    cy.get('#natural-list').verifyAdvanceSort('asc', 'natural', false);
   })
 
   it('Advanced Sorting', () => {
     cy.get('#sortAscending').click()
     cy.get('ul').verifyAdvanceSort('asc', 'alphabetical', false);
-   /* cy.get('.number-list').verifyAdvanceSort('asc', 'numerical');
-    cy.get('.natural-list').verifyAdvanceSort('asc', 'natural', false);
-    cy.get('ul').verifyAdvanceSort('asc', 'alphabetical', true);*/
+    cy.get('#number-list').verifyAdvanceSort('asc', 'numerical');
+    cy.get('#natural-list').verifyAdvanceSort('asc', 'natural', false);
+    cy.get('ul').verifyAdvanceSort('asc', 'alphabetical', true);
   })
 })
