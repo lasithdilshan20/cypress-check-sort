@@ -1,4 +1,5 @@
 Cypress.Commands.add("verifySort", { prevSubject: 'element' }, ($parents, order = 'asc') => {
+    cy.log('**verifySort**')
     $parents.each((index, parent) => {
         let items = [];
         if (parent.tagName === 'TABLE' || parent.tagName === 'TBODY') {
@@ -16,6 +17,7 @@ Cypress.Commands.add("verifySort", { prevSubject: 'element' }, ($parents, order 
 });
 
 Cypress.Commands.add("verifyAdvanceSort", { prevSubject: 'element' }, ($parents, order = 'asc', type = 'alphabetical', caseSensitive = false) => {
+    cy.log('**verifyAdvanceSort**')
     $parents.each((index, parent) => {
         const items = Cypress.$(parent).children().map((index, item) => {
             let text = Cypress.$(item).text().trim();

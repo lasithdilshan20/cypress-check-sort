@@ -1,22 +1,50 @@
 {
   "name": "cypress-check-sort",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Cypress plugin to check if the table is sorted",
+  "main": "src",
+  "types": "src",
+  "files": [
+    "src",
+    "commands.js"
+  ],
+  "release": {
+    "branches": [
+      "1.0",
+      {
+        "name": "master",
+        "channel": "rc",
+        "prerelease": "rc"
+      }
+    ]
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "start": "npx cypress run --record --key 026ce059-c468-4451-9a3f-eaf42ce89a32",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "semantic-release": "semantic-release",
+    "badges": "npx -p dependency-version-badge update-badge cypress"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lasithdilshan20/cypress-check-sort.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cypress",
+    "cypress-plugin",
+    "cypress-check-sort",
+    "cypress-plugin-check-sort",
+    "cypress-plugin-sort"
+  ],
+  "author": "Lasithdilshan20",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/lasithdilshan20/cypress-check-sort/issues"
   },
   "homepage": "https://github.com/lasithdilshan20/cypress-check-sort#readme",
   "dependencies": {
-    "cypress": "^13.6.6"
+    "cypress": "^13.6.6",
+    "semantic-release": "20.0.2"
   }
 }
