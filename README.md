@@ -1,45 +1,75 @@
+# cypress-check-sort [![ci status][ci image]][ci url] [![renovate-app badge][renovate-badge]][renovate-app] ![cypress version](https://img.shields.io/badge/cypress-13.6.0-brightgreen)
 
-# Cypress Sorting Tests
+> This project contains Cypress test cases designed to validate sorting functionality across different HTML elements, including unordered lists (`<ul>`), tables (`<table>`), and div containers (`<div>`). The tests ensure that sorting actions (ascending and descending) performed on these elements result in the expected order.
 
-This project contains Cypress test cases designed to validate sorting functionality across different HTML elements, including unordered lists (`<ul>`), tables (`<table>`), and div containers (`<div>`). The tests ensure that sorting actions (ascending and descending) performed on these elements result in the expected order.
+## install
 
-## Project Setup
-
-To get started with this project, ensure you have Cypress installed and configured in your project. If you haven't done so, refer to the [Cypress documentation](https://docs.cypress.io/guides/getting-started/installing-cypress) for installation instructions.
-
-## Test Cases
-
-The spec file contains several test cases designed to verify the sorting functionality:
-
-- **Unordered List**: Tests sorting on a list of items contained within a `<ul>` element.
-- **Table**: Tests sorting on rows within a `<table>` element.
-- **DIV (Natural Sorting)**: Tests natural sorting within a `<div>` container, ideal for strings containing numerical values.
-- **Advanced Sorting**: Tests various sorting criteria including alphabetical, numerical, and case sensitivity on different containers.
-
-## Running Tests
-
-To run these tests, navigate to your project directory and execute the following command:
-
-```sh
-npx cypress open
+```
+npm i -D cypress-check-sort
+# or
+yarn add -D cypress-check-sort
 ```
 
-This will open the Cypress Test Runner. Select the spec file you wish to run, and observe the execution of the test cases.
+## use
 
-## Test Implementation
+### Simple
 
-Each test case clicks on a sort button (`#sortAscending` or `#sortDescending`) and then verifies the order of the elements within the targeted container (`#listArea`, `#tableArea`, `#natural-list`, etc.) using custom commands (`verifySort` and `verifyAdvanceSort`).
+Include from your Cypress support file or individual spec (cypress > support > e2e.js)
 
-These custom commands are designed to abstract the complexity of sorting validation, allowing for reusable and easily readable test cases.
+```js
+import 'cypress-check-sort/commands'
+```
 
-## Adding New Tests
+```js
+cy.get(parent_element).verifySort(order);
+cy.get(parent_element).verifyAdvanceSort(order, type, caseSensitive);
+```
+Example:
+```js
+  it('Check sorting', () => {
+    cy.get('#sortAscending').click()
+    cy.get('#natural-list').verifyAdvanceSort('asc', 'natural', false)
 
-To add new test cases, define them within the `describe` block using Cypress's `it` function. Utilize the existing custom commands for sorting verification or create new ones as needed to accommodate additional sorting functionalities or HTML structures.
+    cy.get('#sortDescending').click()
+    cy.get('#listArea').verifySort('desc')
+})
+```
 
-## Support
+[ci image]: https://github.com/lasithdilshan20/cypress-check-sort/workflows/ci/badge.svg?branch=main
+[ci url]: https://github.com/lasithdilshan20/cypress-check-sort/actions
+[renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
+[renovate-app]: https://renovateapp.com/
 
-For issues or questions regarding the test cases or the custom commands, consider creating an issue in this repository or referring to the Cypress documentation for further assistance.
+## Small print
 
-## License
+Author: Lasitha Wijenayake &lt;lasithdilshan20@gmail.com&gt; &copy; 2024
 
-This project is open source and available under the MIT License.
+License: MIT - do anything with the code, but don't blame me if it does not work.
+
+Support: if you find any problems with this module, email
+[open issue](https://github.com/lasithdilshan20/cypress-check-sort/issues) on Github
+
+## MIT License
+
+Copyright (c) 2024 Lasitha Wijenayake &lt;lasithdislahan20@gmail.com&gt;
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
